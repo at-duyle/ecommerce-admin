@@ -1,0 +1,87 @@
+<%= form_with(model: admin, local: true) do |form| %>
+  <% if admin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
+
+      <ul>
+      <% admin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username, id: :admin_username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_digest %>
+    <%= form.text_field :password_digest, id: :admin_password_digest %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :admin_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :admin_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.number_field :gender, id: :admin_gender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.number_field :role, id: :admin_role %>
+  </div>
+
+  <div class="field">
+    <%= form.label :auth_token %>
+    <%= form.text_field :auth_token, id: :admin_auth_token %>
+  </div>
+
+  <div class="field">
+    <%= form.label :confirm_send_at %>
+    <%= form.datetime_select :confirm_send_at, id: :admin_confirm_send_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :confirm_token %>
+    <%= form.text_field :confirm_token, id: :admin_confirm_token %>
+  </div>
+
+  <div class="field">
+    <%= form.label :confirm_at %>
+    <%= form.datetime_select :confirm_at, id: :admin_confirm_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reset_send_at %>
+    <%= form.datetime_select :reset_send_at, id: :admin_reset_send_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reset_token %>
+    <%= form.text_field :reset_token, id: :admin_reset_token %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manager_id %>
+    <%= form.text_field :manager_id, id: :admin_manager_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available %>
+    <%= form.check_box :available, id: :admin_available %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

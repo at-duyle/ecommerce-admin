@@ -1,0 +1,94 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @user.password_digest %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @user.gender %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @user.description %>
+</p>
+
+<p>
+  <strong>Auth token:</strong>
+  <%= @user.auth_token %>
+</p>
+
+<p>
+  <strong>Confirm send at:</strong>
+  <%= @user.confirm_send_at %>
+</p>
+
+<p>
+  <strong>Confirm token:</strong>
+  <%= @user.confirm_token %>
+</p>
+
+<p>
+  <strong>Confirm at:</strong>
+  <%= @user.confirm_at %>
+</p>
+
+<p>
+  <strong>Reset send at:</strong>
+  <%= @user.reset_send_at %>
+</p>
+
+<p>
+  <strong>Reset token:</strong>
+  <%= @user.reset_token %>
+</p>
+
+<p>
+  <strong>Available:</strong>
+  <%= @user.available %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @user.slug %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @user.city %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @user.district %>
+</p>
+
+<p>
+  <strong>Ward:</strong>
+  <%= @user.ward %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

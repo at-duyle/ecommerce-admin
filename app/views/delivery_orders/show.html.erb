@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @delivery_order.user %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @delivery_order.status %>
+</p>
+
+<p>
+  <strong>Total price:</strong>
+  <%= @delivery_order.total_price %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @delivery_order.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @delivery_order.city %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @delivery_order.district %>
+</p>
+
+<p>
+  <strong>Ward:</strong>
+  <%= @delivery_order.ward %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @delivery_order.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @delivery_order.phone %>
+</p>
+
+<%= link_to 'Edit', edit_delivery_order_path(@delivery_order) %> |
+<%= link_to 'Back', delivery_orders_path %>
