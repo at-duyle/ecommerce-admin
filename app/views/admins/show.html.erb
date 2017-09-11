@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @admin.username %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @admin.password_digest %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @admin.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @admin.gender %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @admin.role %>
+</p>
+
+<p>
+  <strong>Auth token:</strong>
+  <%= @admin.auth_token %>
+</p>
+
+<p>
+  <strong>Confirm send at:</strong>
+  <%= @admin.confirm_send_at %>
+</p>
+
+<p>
+  <strong>Confirm token:</strong>
+  <%= @admin.confirm_token %>
+</p>
+
+<p>
+  <strong>Confirm at:</strong>
+  <%= @admin.confirm_at %>
+</p>
+
+<p>
+  <strong>Reset send at:</strong>
+  <%= @admin.reset_send_at %>
+</p>
+
+<p>
+  <strong>Reset token:</strong>
+  <%= @admin.reset_token %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @admin.manager %>
+</p>
+
+<p>
+  <strong>Available:</strong>
+  <%= @admin.available %>
+</p>
+
+<%= link_to 'Edit', edit_admin_path(@admin) %> |
+<%= link_to 'Back', admins_path %>
