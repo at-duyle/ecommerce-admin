@@ -18,3 +18,4 @@
 
 .byebug_history
 /config/application.yml
+.rubocop.yml
