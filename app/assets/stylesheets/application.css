@@ -12,4 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap.min
+ *= require font-awesome
+ *= require animate.min
+ *= require custom
+ *= require maps/jquery-jvectormap-2.0.3
+ *= require icheck/flat/green
+ *= require floatexamples
  */
