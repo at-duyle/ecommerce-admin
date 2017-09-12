@@ -17,22 +17,24 @@ ActiveRecord::Schema.define(version: 20170908105247) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
-    t.string "password_digest"
+    t.string "encrypted_password", default: "", null: false
     t.string "email"
     t.string "name"
     t.integer "gender"
     t.integer "role", default: 2
-    t.string "auth_token"
-    t.datetime "confirm_send_at"
-    t.string "confirm_token"
-    t.datetime "confirm_at"
-    t.datetime "reset_send_at"
-    t.string "reset_token"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.bigint "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "available", default: true
+    t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["manager_id"], name: "index_admins_on_manager_id"
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "carts", force: :cascade do |t|
@@ -66,7 +68,7 @@ ActiveRecord::Schema.define(version: 20170908105247) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.float "total_price", default: 5000000.0
+    t.float "total_price"
     t.string "name"
     t.string "city"
     t.string "district"
