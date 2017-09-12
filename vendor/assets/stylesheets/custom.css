@@ -4789,7 +4789,6 @@ a:hover {
 }
 .login_content {
   margin: 0 auto;
-  padding: 25px 0 0;
   position: relative;
   text-align: center;
   text-shadow: 0 1px 0 #fff;
@@ -4894,7 +4893,7 @@ a:hover {
 }
 .login_content form div a {
   font-size: 12px;
-  margin: 10px 15px 0 0;
+  margin: 10px 50px 0 0;
 }
 .reset_pass {
   margin-top: 10px !important;
@@ -4932,7 +4931,7 @@ a:hover {
 }
 .login_content form input[type="submit"], #content form .submit {
   float: left;
-  margin-left: 38px;
+  margin-left: 55px;
 }
 .button a {
   background: url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
