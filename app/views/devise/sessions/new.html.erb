@@ -12,6 +12,7 @@
 <body style="background:#F7F7F7;">
 
   <div class="">
+    <a class="hiddenanchor" id="toregister"></a>
     <a class="hiddenanchor" id="tologin"></a>
 
     <div id="wrapper">
@@ -19,6 +20,7 @@
         <section class="login_content">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <h1>Login Form</h1>
+            <%= devise_error_messages! %>
             <% flash.each do |key, value| %>
               <div class="<%= flash_class(key) %>">
                     <%= value %>
