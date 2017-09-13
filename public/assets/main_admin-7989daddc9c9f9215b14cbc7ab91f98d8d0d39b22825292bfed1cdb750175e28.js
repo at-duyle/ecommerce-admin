@@ -2,8 +2,8 @@
 // All this logic will automatically be available in application.js.
 $(function() {
   var data = $('#invisible').data('rubyvar');
-  var day_data = [];
-  for(var d of data){
+  let day_data = [];
+  for(let d of data){
     day_data.push({"period": d.name, "Hours worked": d.sum })
   }
   formatY = function (period) {
