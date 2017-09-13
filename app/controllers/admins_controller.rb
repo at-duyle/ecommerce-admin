@@ -62,13 +62,14 @@ class AdminsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin
-      @admin = Admin.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_params
-      params.require(:admin).permit(:username, :password_digest, :email, :name, :gender, :role, :auth_token, :confirm_send_at, :confirm_token, :confirm_at, :reset_send_at, :reset_token, :manager_id, :available)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin
+    @admin = Admin.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def admin_params
+    params.require(:admin).permit(:username, :password_digest, :email, :name, :gender, :role, :auth_token, :confirm_send_at, :confirm_token, :confirm_at, :reset_send_at, :reset_token, :manager_id, :available)
+  end
 end

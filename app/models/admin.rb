@@ -35,6 +35,5 @@ class Admin < ApplicationRecord
 
   enum role: %w[admin manager partner]
   enum gender: %w[male female other]
-
   # ================Validates=====================
 end

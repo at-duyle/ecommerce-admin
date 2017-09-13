@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    password: 'secret'
+  }, controllers: {
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords'
+  }
   resources :users
   resources :sub_categories
   resources :shops

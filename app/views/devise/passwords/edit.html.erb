@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>EcommerceAdmin</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body style="background:#F7F7F7;">
+
+  <div class="">
+    <a class="hiddenanchor" id="toregister"></a>
+    <a class="hiddenanchor" id="tologin"></a>
+
+    <div id="wrapper">
+      <div id="login" class="animate form">
+        <section class="login_content">
+          <h1>Change password</h1>
+
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= devise_error_messages! %>
+            <%= f.hidden_field :reset_password_token %>
+
+            <div>
+              <%= f.label :password, "New password", class: "pull-left" %>
+              <% if @minimum_password_length %>
+                <em style="margin-right: 95px;">(<%= @minimum_password_length %> characters minimum)</em><br />
+              <% end %>
+              <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control' %>
+            </div>
+
+            <div>
+              <%= f.label :password_confirmation, "Confirm new password", class: "pull-left" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit "Change my password", class: "btn btn-default submit" %>
+              <%= render "devise/shared/links" %>
+            </div>
+          <% end %>
+
+          <!-- form -->
+        </section>
+        <!-- content -->
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
