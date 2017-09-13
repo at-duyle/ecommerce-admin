@@ -1,16 +1,49 @@
-<h2>Forgot your password?</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<head>
+  <title>EcommerceAdmin</title>
+  <%= csrf_meta_tags %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body style="background:#F7F7F7;">
+
+  <div id="wrapper">
+    <div class="animate form">
+      <section class="login_content">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <h1>Forgot password?</h1>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email", required: true %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Send me reset password instructions", class: "btn btn-default submit" %>
+          </div>
+          <div class="clearfix"></div>
+          <div class="separator">
+
+            <p class="change_link">Already a member ?
+              <%= render "devise/shared/links", class: "to_register" %>
+            </p>
+            <div class="clearfix"></div>
+            <br />
+            <div>
+              <h1><i class="fa fa-paw" style="font-size: 26px;"></i> SuperShop!</h1>
+            </div>
+          </div>
+        <% end %>
+        <!-- form -->
+      </section>
+      <!-- content -->
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+</body>
 
-<%= render "devise/shared/links" %>
+</html>

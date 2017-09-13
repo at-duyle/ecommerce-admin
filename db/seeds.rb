@@ -19,4 +19,17 @@
     reset_password_sent_at: Time.now(),
     reset_password_token: rand(100000..999999),)
 end
+
+Admin.create!(username: 'duyenbui',
+    password: '123456',
+    email: 'anhduyen1510@gmail.com',
+    name: 'anhduyen',
+    gender: rand(0..2),
+    role: rand(0..2),
+    confirmation_sent_at: Time.now(),
+    confirmed_at: Time.now(),
+    confirmation_token: rand(100000..999999),
+    reset_password_sent_at: Time.now(),
+    reset_password_token: rand(100000..999999),)
+
 puts 'Admin'
