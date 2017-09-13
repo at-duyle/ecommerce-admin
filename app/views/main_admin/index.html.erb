@@ -1,0 +1,75 @@
+<div class="row top_tiles">
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-list"></i>
+      </div>
+      <div class="count"><%= @shop_count %></div>
+      <h3>SHOPS</h3>
+      <p>List of shops.</p>
+    </div>
+  </div>
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-list-ul"></i>
+      </div>
+      <div class="count"><%= @category_count %></div>
+      <h3>CATEGORIES</h3>
+      <p>List of categories, subcategories of them.</p>
+    </div>
+  </div>
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-product-hunt"></i>
+      </div>
+      <div class="count"><%= @product_count %></div>
+      <h3>PRODUCTS</h3>
+      <p>List of products.</p>
+    </div>
+  </div>
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-users"></i>
+      </div>
+      <div class="count"><%= @user_count %></div>
+      <h3>USERS</h3>
+      <p>List of users.</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Shops Seller</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="row" style="border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div id="graph_bar" style="width:100%;"></div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <div>
+              <div class="x_title">
+                <h2>Top Seller</h2>
+                <div class="clearfix"></div>
+              </div>
+              <ul class="list-unstyled top_profiles scroll-view">
+                <%= render partial: "shops_sell", collection: @shops_sells %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="invisible" data-rubyvar="<%= @shops_sells.to_json %>"></div>
+<%= javascript_include_tag params[:controller] %>

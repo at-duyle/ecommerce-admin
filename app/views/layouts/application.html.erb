@@ -16,7 +16,7 @@
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
             <a href="index.html" class="site_title">
-              <i class="fa fa-paw"></i> <span>Gentellela Alela!</span>
+              <%= image_tag("/assets/logo.png", class: "img_circle", width: '28%'  ) %> <span>Super Shop</span>
             </a>
           </div>
           <div class="clearfix"></div>
@@ -37,7 +37,7 @@
               <ul class="nav side-menu">
                 <li>
                   <a>
-                  <i class="fa fa-home"></i> Home
+                    <i class="fa fa-home"></i> Home
                   </a>
                 </li>
                 <li>
@@ -315,12 +315,12 @@
         </div>
       </div>
       <%# End Top Bar %>
+      <%# Begin Content Bar %>
+      <div class="right_col" role="main">
+        <%= yield %>
+      </div>
+      <%# End Top Bar %>
     </div>
-    <%# Begin Content Bar %>
-    <div class="right_col" role="main">
-      <%= yield %>
-    </div>
-    <%# End Top Bar %>
   </div>
 </div>
 </body>
