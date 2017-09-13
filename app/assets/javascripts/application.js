@@ -12,7 +12,6 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery.min
 //= require nprogress
 //= require bootstrap.min
@@ -28,6 +27,8 @@
 //
 //= require icheck/icheck.min
 //= require moment/moment.min
+//= require moris/raphael-min
+//= require moris/morris.min
 //= require datepicker/daterangepicker
 //= require chartjs/chart.min
 //= require custom

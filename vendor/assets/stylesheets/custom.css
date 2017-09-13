@@ -633,7 +633,7 @@ li.current-page a {
 }
 .panel_toolbox {
   float: right;
-  min-width: 70px;
+  /*min-width: 70px;*/
 }
 .panel_toolbox>li {
   float: left;
