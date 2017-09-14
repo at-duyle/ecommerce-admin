@@ -9,11 +9,14 @@ Rails.application.routes.draw do
   }
   resources :users
   resources :sub_categories
-  resources :shops
+  resources :shops do
+    collection do
+      resources :products
+    end
+  end
   resources :purchase_orders
   resources :products_purchase_orders
   resources :products_delivery_orders
-  resources :products
   resources :images
   resources :delivery_orders
   resources :comments

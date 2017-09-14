@@ -23,13 +23,7 @@ class Admins::SessionsController < Devise::SessionsController
 
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
-    if resource_or_scope == :admin
-      users_path
-    elsif resource_or_scope == :manager
-      products_path
-    else
-      root_path
-    end
+    new_admin_session_path
   end
 
   def after_sign_in_path_for(admin)

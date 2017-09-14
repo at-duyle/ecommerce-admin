@@ -23,8 +23,6 @@
 //bootstrap progress js
 //= require progressbar/bootstrap-progressbar.min
 //= require nicescroll/jquery.nicescroll.min
-//
-//
 //= require icheck/icheck.min
 //= require moment/moment.min
 //= require moris/raphael-min
@@ -47,3 +45,4 @@
 //= require maps/jquery-jvectormap-us-aea-en
 //= require pace/pace.min
 //= require skycons/skycons.min
+
