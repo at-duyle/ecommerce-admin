@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :shops
   devise_for :admins, path_names: {
     sign_in: 'login',
     sign_out: 'logout',

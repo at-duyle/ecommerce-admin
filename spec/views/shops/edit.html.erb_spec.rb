@@ -9,7 +9,6 @@ RSpec.describe "shops/edit", type: :view do
       :logo => "MyString",
       :latitude => 1.5,
       :longitude => 1.5,
-      :admin => nil,
       :available => false,
       :slug => "MyString"
     ))
@@ -31,8 +30,6 @@ RSpec.describe "shops/edit", type: :view do
       assert_select "input[name=?]", "shop[latitude]"
 
       assert_select "input[name=?]", "shop[longitude]"
-
-      assert_select "input[name=?]", "shop[admin_id]"
 
       assert_select "input[name=?]", "shop[available]"
 

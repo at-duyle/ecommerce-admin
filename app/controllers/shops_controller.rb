@@ -1,5 +1,4 @@
 class ShopsController < ApplicationController
-  load_and_authorize_resource
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops
@@ -70,6 +69,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :address, :phone_number, :logo, :latitude, :longitude, :admin_id, :available, :slug)
+      params.require(:shop).permit(:name, :address, :phone_number, :logo, :latitude, :longitude, :available, :slug)
     end
 end
