@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  load_and_authorize_resource find_by: :slug
+
   before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products
@@ -10,6 +12,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @images = Image.where(product_id: @product.id)
   end
 
   # GET /products/new
@@ -61,15 +64,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
+  end
+
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.friendly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:name, :producer, :price, :quantity, :description, :categorical_type, :categorical_id, :shop_id, :slug, :available)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:name, :producer, :price, :quantity, :description, :categorical_type, :categorical_id, :shop_id, :slug, :available)
+  end
 end
