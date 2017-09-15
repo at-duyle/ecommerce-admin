@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords'
   }
   resources :users
-  resources :sub_categories
   resources :shops do
     collection do
       resources :products
@@ -21,6 +20,7 @@ Rails.application.routes.draw do
   resources :delivery_orders
   resources :comments
   resources :categories
+  resources :sub_categories
   resources :carts
   # resources :admins
   resources :main_admin, only: :index
