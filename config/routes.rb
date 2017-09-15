@@ -8,16 +8,19 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords'
   }
   resources :users
-  resources :sub_categories
-  resources :shops
+  resources :shops do
+    collection do
+      resources :products
+    end
+  end
   resources :purchase_orders
   resources :products_purchase_orders
   resources :products_delivery_orders
-  resources :products
   resources :images
   resources :delivery_orders
   resources :comments
   resources :categories
+  resources :sub_categories
   resources :carts
   # resources :admins
   resources :main_admin, only: :index
