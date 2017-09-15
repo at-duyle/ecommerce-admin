@@ -4447,11 +4447,8 @@ ul.project_files li a i {
   border-radius: 50px;
 }
 .product_gallery a {
-  width: 100px;
-  height: 100px;
   float: left;
   margin: 10px;
-  border: 1px solid #e5e5e5;
 }
 .product_gallery a img {
   width: 100%;
