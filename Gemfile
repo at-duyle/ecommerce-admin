@@ -33,8 +33,6 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 gem 'figaro'
 
-gem 'friendly_id'
-
 gem 'ffaker'
 
 gem 'faker'
@@ -42,6 +40,9 @@ gem 'faker'
 gem 'devise'
 
 gem 'cancancan'
+
+gem 'friendly_id'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

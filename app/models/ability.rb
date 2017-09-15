@@ -8,7 +8,7 @@ class Ability
       can :manage, :all
     elsif user.manager?
       can :manage, Shop, admin_id: user.id
-      can :manage, Product
+      can :manage, Product, shop_id: Shop.find(user.shop_id).id
     else
       cannot :manage, :all
       # can :manage, Shop, admin_id: :user.id

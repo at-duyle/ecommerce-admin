@@ -61,14 +61,20 @@ class ShopsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shop
-      @shop = Shop.find(params[:id])
-    end
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def shop_params
-      params.require(:shop).permit(:name, :address, :phone_number, :logo, :latitude, :longitude, :available, :slug)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shop
+    @shop = Shop.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def shop_params
+    params.require(:shop).permit(:name, :address, :phone_number, :logo, :latitude, :longitude, :available, :slug)
+  end
 end

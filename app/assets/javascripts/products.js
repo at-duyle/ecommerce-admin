@@ -32,9 +32,8 @@ var handleDataTableButtons = function() {
       exportOptions: {
         columns: [ 0, 1, 2, 3, 4, 5 ]
       }
-    },
-    ],
-    responsive: !0
+    }
+    ]
   })
 },
 TableManageButtons = function() {
@@ -47,3 +46,7 @@ TableManageButtons = function() {
 }();
 
 TableManageButtons.init();
+
+document.addEventListener("turbolinks:before-cache", function() {
+  $("#datatable-buttons").DataTable().destroy();
+});
