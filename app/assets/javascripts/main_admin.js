@@ -4,7 +4,7 @@ $(function() {
   var data = $('#invisible').data('rubyvar');
   var day_data = [];
   for(var d of data){
-    day_data.push({"period": d.name, "Hours worked": d.sum })
+    day_data.push({period: d.name, worked: d.sum })
   }
   formatY = function (period) {
     return '$'+ period;
@@ -15,8 +15,8 @@ $(function() {
     hideHover: 'always',
     xkey: 'period',
     barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-    ykeys: ['Hours worked', 'sorned'],
-    labels: ['Hours worked', 'SORN'],
+    ykeys: ['worked', 'sorned'],
+    labels: ['worked', 'SORN'],
     xLabelAngle: 60,
     yLabelFormat:formatY
   });

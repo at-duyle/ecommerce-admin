@@ -33,7 +33,7 @@ class Admin < ApplicationRecord
   has_many :partner, class_name: 'Admin', foreign_key: 'manager_id'
   belongs_to :manager, class_name: 'Admin', optional: true
 
-  has_many :shops
+  belongs_to :shop
 
   # ================ENUMS=====================
 

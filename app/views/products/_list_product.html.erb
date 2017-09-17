@@ -1,0 +1,20 @@
+<tr>
+  <td><%= list_product.name %></td>
+  <td><%= list_product.producer %></td>
+  <td><%= list_product.price %></td>
+  <td><%= list_product.quantity %></td>
+  <td><%= list_product.slug %></td>
+  <td><%= list_product.available %></td>
+  <td><%= link_to product_path(list_product.slug) do %>
+    <button class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-search"></span></button>
+    <% end %>
+  </td>
+  <td><%= link_to edit_product_path(list_product) do %>
+    <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+    <% end %>
+  </td>
+  <td><%= link_to list_product, method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+    <% end %>
+  </td>
+</tr>

@@ -1,54 +1,99 @@
 <p id="notice"><%= notice %></p>
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Breadcrum</h3>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
 
-<p>
-  <strong>Producer:</strong>
-  <%= @product.producer %>
-</p>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Detail of <strong><%= @product.name %></strong></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a href="#"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="product-image">
+              <% if @images.count > 0 %>
+              <img src="<%= @images[0].url %>" class="img-thumbnail" alt="<%= @product.name %>" />
+              <% else %>
+              <img src="https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg" class="img-thumbnail" alt="<%= @product.name %>" />
+              <% end %>
+            </div>
+            <% if @images.count > 1 %>
+            <div class="product_gallery">
+              <% for i in 1...@images.count %> 
+              <a class="col-md-4">
+                <img src="<%= @images[i].url %>" class="img-thumbnail" alt="<%= @product.name %>" />
+              </a>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @product.quantity %>
-</p>
+          <div class="col-md-8 col-sm-8 col-xs-12" style="border:0px solid #e5e5e5;">
+            <h2 class="prod_title"><%= @product.name %></h2>
+            <div class="table-full-width">
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td width="30%">Producer</td>
+                    <td><strong><%= @product.producer %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Price</td>
+                    <td><strong><%= @product.price %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Quantity</td>
+                    <td><strong><%= @product.quantity %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Decription</td>
+                    <td><strong><%= @product.description %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Available</td>
+                    <% if @product.available && @product.quantity > 0 %>
+                    <td><strong>In stock</strong></td>
+                    <% elsif @product.available &&  @product.quantity <= 0 %>
+                    <td><strong>Out of stock</strong></td>
+                    <% elsif !@product.available &&  @product.quantity <= 0 %>
+                    <td><strong>Stop providing</strong></td>
+                    <% else %>
+                    <td><strong>Stop providing</strong></td>
+                    <% end %>
+                  </tr>
+                </tbody>
+              </table>
+              <%= link_to 'Edit Product', new_product_path, class: 'btn btn-primary pull-right' %>
+              <%= link_to 'Back', products_path, class: 'btn btn-default pull-right' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Categorical type:</strong>
-  <%= @product.categorical_type %>
-</p>
-
-<p>
-  <strong>Categorical:</strong>
-  <%= @product.categorical_id %>
-</p>
-
-<p>
-  <strong>Shop:</strong>
-  <%= @product.shop %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @product.slug %>
-</p>
-
-<p>
-  <strong>Available:</strong>
-  <%= @product.available %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>

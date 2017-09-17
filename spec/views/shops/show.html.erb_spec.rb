@@ -9,7 +9,6 @@ RSpec.describe "shops/show", type: :view do
       :logo => "Logo",
       :latitude => 2.5,
       :longitude => 3.5,
-      :admin => nil,
       :available => false,
       :slug => "Slug"
     ))
@@ -23,7 +22,6 @@ RSpec.describe "shops/show", type: :view do
     expect(rendered).to match(/Logo/)
     expect(rendered).to match(/2.5/)
     expect(rendered).to match(/3.5/)
-    expect(rendered).to match(//)
     expect(rendered).to match(/false/)
     expect(rendered).to match(/Slug/)
   end

@@ -2,8 +2,6 @@ class Admins::SessionsController < Devise::SessionsController
   layout :false
   # before_action :configure_sign_in_params, only: [:create]
 
-  before_action :authenticate_admin!
-
   # GET /resource/sign_in
   # def new
   #   super
@@ -23,7 +21,7 @@ class Admins::SessionsController < Devise::SessionsController
 
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
-    destroy_admin_session_path
+    new_admin_session_path
   end
 
   def after_sign_in_path_for(admin)
