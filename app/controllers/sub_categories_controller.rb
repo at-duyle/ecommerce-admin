@@ -14,11 +14,13 @@ class SubCategoriesController < ApplicationController
 
   # GET /sub_categories/new
   def new
+    @categories = Category.all
     @sub_category = SubCategory.new
   end
 
   # GET /sub_categories/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /sub_categories
@@ -62,13 +64,14 @@ class SubCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sub_category
-      @sub_category = SubCategory.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sub_category_params
-      params.require(:sub_category).permit(:name, :category_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sub_category
+    @sub_category = SubCategory.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sub_category_params
+    params.require(:sub_category).permit(:name, :category_id)
+  end
 end
