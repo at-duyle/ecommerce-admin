@@ -1,6 +1,20 @@
-<h1>Editing Sub Category</h1>
+<div class="" role="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Editting Subcategory</h2>
+          <div class="clearfix"></div>
+        </div>
+        <%= render 'form', sub_category: @sub_category %>
 
-<%= render 'form', sub_category: @sub_category %>
+        <div class="pull-right">
+          <%= link_to 'Show', @sub_category %> |
+          <%= link_to 'Back', sub_categories_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Show', @sub_category %> |
-<%= link_to 'Back', sub_categories_path %>
+
