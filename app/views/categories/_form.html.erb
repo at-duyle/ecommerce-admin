@@ -1,27 +1,29 @@
-<%= form_with(model: category, local: true) do |form| %>
-  <% if category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+<div class="x_panel">
+  <div class="x_content">
+    <!-- start form for validation -->
+    <%= form_with(model: category, local: true) do |form| %>
+      <% if category.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-      <ul>
-      <% category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :category_name %>
-  </div>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :category_name, class: "form-control", required: true %>
+      </div>
 
-  <div class="field">
-    <%= form.label :slug %>
-    <%= form.text_field :slug, id: :category_slug %>
-  </div>
+      <div class="actions" style="padding-top: 20px;">
+        <%= form.submit class: "btn btn-default" %>
+      </div>
+    <% end %>
+    <!-- end form for validations -->
 
-  <div class="actions">
-    <%= form.submit %>
   </div>
-<% end %>
+</div>
