@@ -1,5 +1,32 @@
-<h1>New Sub Category</h1>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form', sub_category: @sub_category %>
+<div class="" role="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div id="category" class="collapse">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>New Category</h2>
+            <div class="clearfix"></div>
+          </div>
+          <%= render 'categories/form', category: @category %>
+          <a href=""></a>
+          <div class="pull-right">
+            <%= link_to 'Back to category list', categories_path %>
+          </div>
+        </div>
+      </div>
 
-<%= link_to 'Back', sub_categories_path %>
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>New Subcategory</h2>
+          <div class="clearfix"></div>
+        </div>
+        <%= render 'form', sub_category: @sub_category %>
+        <div class="pull-right">
+          <%= link_to 'Back to subcategory list', sub_categories_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
