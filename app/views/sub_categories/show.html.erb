@@ -7,7 +7,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @sub_category.category %>
+  <%= Category.find(@sub_category.category_id).name %>
 </p>
 
 <p>

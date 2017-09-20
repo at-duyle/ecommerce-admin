@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
+
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
@@ -11,6 +12,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @sub_categories = SubCategory.where(category_id: @category.id)
   end
 
   # GET /categories/new
@@ -62,10 +64,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

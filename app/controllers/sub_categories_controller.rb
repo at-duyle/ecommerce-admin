@@ -1,5 +1,6 @@
 class SubCategoriesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
+
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
 
   # GET /sub_categories
@@ -15,11 +16,14 @@ class SubCategoriesController < ApplicationController
 
   # GET /sub_categories/new
   def new
+    @category = Category.new
     @sub_category = SubCategory.new
+    @categories = Category.all
   end
 
   # GET /sub_categories/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /sub_categories
@@ -62,14 +66,20 @@ class SubCategoriesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sub_category
-      @sub_category = SubCategory.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sub_category_params
-      params.require(:sub_category).permit(:name, :category_id, :slug)
-    end
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
   end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sub_category
+    @sub_category = SubCategory.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sub_category_params
+    params.require(:sub_category).permit(:name, :category_id)
+  end
+end
