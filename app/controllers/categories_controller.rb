@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  load_and_authorize_resource find_by: :slug
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
@@ -60,6 +61,11 @@ class CategoriesController < ApplicationController
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
   end
 
   private

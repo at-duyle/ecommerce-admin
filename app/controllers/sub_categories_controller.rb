@@ -1,4 +1,5 @@
 class SubCategoriesController < ApplicationController
+  load_and_authorize_resource find_by: :slug
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
 
   # GET /sub_categories
@@ -62,6 +63,11 @@ class SubCategoriesController < ApplicationController
       format.html { redirect_to sub_categories_url, notice: 'Sub category was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
   end
 
   private

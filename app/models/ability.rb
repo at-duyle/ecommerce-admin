@@ -7,11 +7,13 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.manager?
-      can :manage, Shop, admin_id: user.id
+      can :manage, Shop, id: user.shop_id
       can :manage, Product, shop_id: Shop.find(user.shop_id).id
+      can :manage, Admin, manager_id: user.id
+    elsif user.partner?
+      can :read, :all
     else
       cannot :manage, :all
-      # can :manage, Shop, admin_id: :user.id
     end
     #
     # The first argument to `can` is the action you are giving the user

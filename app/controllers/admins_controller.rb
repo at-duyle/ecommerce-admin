@@ -1,10 +1,11 @@
 class AdminsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
 
   # GET /admins
   # GET /admins.json
   def index
-    @admins = Admin.all
+    @admins = current_admin.admin? ? Admin.all : Admin.where(manager_id: current_admin.id)
   end
 
   # GET /admins/1
@@ -59,6 +60,11 @@ class AdminsController < ApplicationController
       format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied: #{exception}"
+    redirect_to new_admin_session_path
   end
 
   private
