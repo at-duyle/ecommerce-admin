@@ -50,3 +50,18 @@ TableManageButtons.init();
 document.addEventListener("turbolinks:before-cache", function() {
   $("#datatable-buttons").DataTable().destroy();
 });
+
+function clickCategory(){
+  categoryID = $("#category").val();
+  $.ajax({
+    method: "GET",
+    url: "/shops/products/sub/"+ categoryID,
+    dataType: "script",
+    success: function(data){
+      console.log(data);
+    },
+    error: function(err){
+      console.log(err);
+    }
+  });
+}

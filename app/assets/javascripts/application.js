@@ -45,4 +45,8 @@
 //= require maps/jquery-jvectormap-us-aea-en
 //= require pace/pace.min
 //= require skycons/skycons.min
+//= require fileinput/piexif.min
+//= require fileinput/purify.min
+//= require fileinput/fileinput.min
+//= require cloudinary
 

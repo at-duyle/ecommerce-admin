@@ -1,0 +1,18 @@
+development:
+  cloud_name: drgmu20kr
+  api_key: '772998888176559'
+  api_secret: 5KNEZV_vVkhkI6hR2zLG95LGJEo
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: drgmu20kr
+  api_key: '772998888176559'
+  api_secret: 5KNEZV_vVkhkI6hR2zLG95LGJEo
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: drgmu20kr
+  api_key: '772998888176559'
+  api_secret: 5KNEZV_vVkhkI6hR2zLG95LGJEo
+  enhance_image_tag: true
+  static_image_support: false
