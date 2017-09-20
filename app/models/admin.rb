@@ -40,4 +40,8 @@ class Admin < ApplicationRecord
   enum role: %w[admin manager partner]
   enum gender: %w[male female other]
   # ================Validates=====================
+
+  def active_for_authentication?
+    super && available?
+  end
 end
