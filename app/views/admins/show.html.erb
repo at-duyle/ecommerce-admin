@@ -1,0 +1,103 @@
+<p id="notice"><%= notice %></p>
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Profile</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Profile of <strong><%= @admin.name %></strong></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a href="#"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="product-image" style="padding-top: 30px;">
+              <% if @admin.role === 'admin' %>
+              <img src="http://www.lets-develop.com/wp-content/themes/olivias_theme/images/custom-avatar-admin.jpg" class="img-thumbnail" alt="admin" />
+              <% elsif @admin.role === 'manager' %>
+              <img src="https://bootstrapmaster.com/wp-content/themes/bootstrap/img/avatars/noavatar.png" class="img-thumbnail" alt="manager" />
+              <% else %>
+              <img src="http://bodyworkshealthclinic.com/images/avatar.png" class="img-thumbnail" alt="partner" />
+              <% end %>
+            </div>
+          </div>
+
+          <div class="col-md-8 col-sm-8 col-xs-12" style="border:0px solid #e5e5e5;">
+            <h2 class="prod_title"><%= @admin.name %></h2>
+            <div class="table-full-width">
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td width="30%">Username</td>
+                    <td><strong><%= @admin.username %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Email</td>
+                    <td><strong><%= @admin.email %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Full name</td>
+                    <td><strong><%= @admin.name %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Role</td>
+                    <td><strong><%= @admin.role %></strong></td>
+                  </tr>
+                  <% if @admin.role === 'partner' %>
+                    <tr>
+                      <td width="30%">Manager</td>
+                      <td><strong><%= Admin.find(@admin.manager_id).name %></strong></td>
+                    </tr>
+                  <% end %>
+                  <tr>
+                    <td width="30%">Gender</td>
+                    <td><strong><%= @admin.gender %></strong></td>
+                  </tr>
+                  <% if @admin.role != 'admin' %>
+                  <tr>
+                    <td width="30%">Shop</td>
+                    <td><strong><%= Shop.find(@admin.shop_id).name %></strong></td>
+                  </tr>
+                  <% end %>
+                  <tr>
+                    <td width="30%">Status</td>
+                    <% if @admin.available %>
+                      <td><strong>Available</strong></td>
+                    <% else %>
+                      <td><strong>Non-available</strong></td>
+                    <% end %>
+                  </tr>
+                </tbody>
+              </table>
+              <%= link_to 'Edit admin', edit_admin_path(@admin), class: 'btn btn-primary pull-right' %>
+              <%= link_to 'Back', admins_path, class: 'btn btn-default pull-right' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
