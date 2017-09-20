@@ -54,13 +54,13 @@ class AdminsController < ApplicationController
 
   # DELETE /admins/1
   # DELETE /admins/1.json
-  def destroy
-    @admin.destroy
-    respond_to do |format|
-      format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @admin.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied: #{exception}"
