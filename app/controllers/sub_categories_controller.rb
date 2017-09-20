@@ -1,11 +1,12 @@
 class SubCategoriesController < ApplicationController
   load_and_authorize_resource find_by: :slug
+
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
 
   # GET /sub_categories
   # GET /sub_categories.json
   def index
-    @sub_categories = SubCategory.all
+    @sub_categories = SubCategory.where(category_id: params[:category_id])
   end
 
   # GET /sub_categories/1

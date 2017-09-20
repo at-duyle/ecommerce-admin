@@ -61,7 +61,7 @@ k = 0
         reset_password_token: rand(100000..999999),
         manager_id: admin.id,
         shop_id: k)
-  end
+end
 end
 
 admin_temp = Admin.create!(username: 'duyenbui',

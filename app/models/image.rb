@@ -10,5 +10,6 @@
 #
 
 class Image < ApplicationRecord
+  mount_uploader :url, ProductsUploader
   belongs_to :product
 end

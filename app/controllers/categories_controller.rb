@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   load_and_authorize_resource find_by: :slug
+
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
@@ -78,4 +79,4 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:name, :slug)
     end
-end
+  end

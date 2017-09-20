@@ -1,8 +1,10 @@
 class ProductsController < ApplicationController
   load_and_authorize_resource find_by: :slug
+  skip_load_resource only: :sub
+  skip_authorize_resource only: :sub
 
   before_action :set_product, only: %i[show edit update destroy]
-
+  before_action :set_categories, only: %i[new edit]
   # GET /products
   # GET /products.json
   def index
@@ -18,6 +20,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @images = @product.images.build
+    @sub_categories = []
   end
 
   # GET /products/1/edit
@@ -27,10 +31,16 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-
+    @product = Product.new(product_params.merge(shop_id: current_admin.shop_id,
+                                                categorical_type: 'SubCategory',
+                                                categorical_id: 1,
+                                                available: true))
     respond_to do |format|
-      if @product.save
+      if @product.save!
+        binding.pry
+        params[:images][:url].each do |image|
+          @product.images.create!(url: image)
+        end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -64,6 +74,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def sub
+    @sub_categories = SubCategory.where(category_id: params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied: #{exception}"
     redirect_to new_admin_session_path
@@ -76,8 +93,13 @@ class ProductsController < ApplicationController
     @product = Product.friendly.find(params[:id])
   end
 
+  def set_categories
+    @categories = Category.all
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name, :producer, :price, :quantity, :description, :categorical_type, :categorical_id, :shop_id, :slug, :available)
+    params.require(:product).permit(:name, :producer, :price, :quantity, :description,
+                                    images: [:id, :product_id, :url])
   end
 end

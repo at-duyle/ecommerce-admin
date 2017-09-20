@@ -10,6 +10,9 @@ class Ability
     elsif user.manager?
       can :manage, Shop, id: user.shop_id
       can :manage, Product, shop_id: Shop.find(user.shop_id).id
+      can :index, :main_admin
+      can :read, Category
+      can :read, SubCategory
       can :manage, Admin, manager_id: user.id
       cannot :destroy, Admin, manager_id: user.id
     elsif user.partner?

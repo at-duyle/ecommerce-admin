@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :users
   resources :shops do
     collection do
-      resources :products
+      resources :products do
+        collection do
+          get 'sub/:id', controller: 'products', action: 'sub'
+        end
+      end
     end
   end
   resources :purchase_orders
@@ -19,8 +23,13 @@ Rails.application.routes.draw do
   resources :images
   resources :delivery_orders
   resources :comments
-  resources :categories
-  resources :sub_categories
+  resources :categories do
+    resources :sub_categories do
+      collection do
+        get 'sub'
+      end
+    end
+  end
   resources :carts
   resources :admins
   resources :main_admin, only: :index
