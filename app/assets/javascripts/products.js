@@ -58,7 +58,9 @@ function clickCategory(){
     url: "/shops/products/sub/"+ categoryID,
     dataType: "script",
     success: function(data){
-      console.log(data);
+      if(data !== '$("#sub_category").empty().append(\'\');'){
+        $('#sub_category').attr('required', true);
+      }
     },
     error: function(err){
       console.log(err);

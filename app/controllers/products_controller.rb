@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   skip_authorize_resource only: :sub
 
   before_action :set_product, only: %i[show edit update destroy]
-  before_action :set_categories, only: %i[new edit]
+  before_action :set_categories, only: %i[new edit create update]
   # GET /products
   # GET /products.json
   def index
@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @availables = []
     @product = Product.new
     @images = @product.images.build
     @sub_categories = []
@@ -26,24 +27,46 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @availables = [true, false]
+    @image = Image.where(product_id: @product.id)
+    @available = @product.available
+    if @product.categorical_type.equal? 'Category'
+      @category_value = @product.categorical_id
+    else
+      @sub_category_value = @product.categorical_id
+      @category_value = SubCategory.find(@sub_category_value).category_id
+      @sub_categories = SubCategory.where(category_id: @category_value)
+    end
   end
 
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params.merge(shop_id: current_admin.shop_id,
-                                                categorical_type: 'SubCategory',
-                                                categorical_id: 1,
-                                                available: true))
+    @product = if params[:product][:sub_category].nil?
+                 Product.new(product_params.merge(shop_id: current_admin.shop_id,
+                                                  categorical_type: 'Category',
+                                                  categorical_id: params[:product][:category],
+                                                  available: true))
+               else
+                 Product.new(product_params.merge(shop_id: current_admin.shop_id,
+                                                  categorical_type: 'SubCategory',
+                                                  categorical_id: params[:product][:sub_category],
+                                                  available: true))
+               end
     respond_to do |format|
       if @product.save!
-        binding.pry
-        params[:images][:url].each do |image|
-          @product.images.create!(url: image)
+        unless params[:images].nil?
+          params[:images][:url].each do |image|
+            @product.images.create!(url: image)
+          end
         end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
+        @availables = []
+        @product = Product.new
+        @images = @product.images.build
+        @sub_categories = []
         format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -54,12 +77,58 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
+      if params[:product][:sub_category].nil?
+        if @product.update(product_params.merge(shop_id: current_admin.shop_id,
+                                                categorical_type: 'Category',
+                                                categorical_id: params[:product][:category],
+                                                available: params[:product][:available]))
+          unless params[:images].nil?
+            params[:images][:url].each do |image|
+              @product.images.create!(url: image)
+            end
+          end
+          format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+          format.json { render :show, status: :ok, location: @product }
+        else
+          @availables = [true, false]
+          @image = Image.where(product_id: @product.id)
+          @available = @product.available
+          if @product.categorical_type.equal? 'Category'
+            @category_value = @product.categorical_id
+          else
+            @sub_category_value = @product.categorical_id
+            @category_value = SubCategory.find(@sub_category_value).category_id
+            @sub_categories = SubCategory.where(category_id: @category_value)
+          end
+          format.html { render :edit }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        if @product.update!(product_params.merge(shop_id: current_admin.shop_id,
+                                                 categorical_type: 'SubCategory',
+                                                 categorical_id: params[:product][:sub_category],
+                                                 available: params[:product][:available]))
+          unless params[:images].nil?
+            params[:images][:url].each do |image|
+              @product.images.create!(url: image)
+            end
+          end
+          format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+          format.json { render :show, status: :ok, location: @product }
+        else
+          @availables = [true, false]
+          @image = Image.where(product_id: @product.id)
+          @available = @product.available
+          if @product.categorical_type.equal? 'Category'
+            @category_value = @product.categorical_id
+          else
+            @sub_category_value = @product.categorical_id
+            @category_value = SubCategory.find(@sub_category_value).category_id
+            @sub_categories = SubCategory.where(category_id: @category_value)
+          end
+          format.html { render :edit }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

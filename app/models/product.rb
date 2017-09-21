@@ -34,6 +34,11 @@ class Product < ApplicationRecord
   belongs_to :categorical, polymorphic: true
   belongs_to :shop
 
+  # =============Validates================
+  validates :name, :producer, :price, :quantity, :description, presence: true
+  validates :quantity, numericality: { greater_than_or_equal_to: 0 }
+  validates :price, numericality: { greater_than: 0 }
+
   # ==============Attributes================
   attr_accessor :message
 
