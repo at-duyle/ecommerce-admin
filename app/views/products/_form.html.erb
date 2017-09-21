@@ -19,7 +19,7 @@
       Name <span class="required">*</span>
       <% end %>
       <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.text_field :name, id: :product_name, class: 'form-control col-md-12 col-xs-12' %>
+        <%= form.text_field :name, id: :product_name, class: 'form-control col-md-12 col-xs-12', required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -27,7 +27,7 @@
       Producer <span class="required">*</span>
       <% end %>
       <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.text_field :producer, id: :product_producer, class: 'form-control col-md-12 col-xs-12' %>
+        <%= form.text_field :producer, id: :product_producer, class: 'form-control col-md-12 col-xs-12', required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -35,7 +35,7 @@
       Price <span class="required">*</span>
       <% end %>
       <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.text_field :price, id: :product_price, class: 'form-control col-md-12 col-xs-12' %>
+        <%= form.text_field :price, id: :product_price, class: 'form-control col-md-12 col-xs-12', required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -43,7 +43,7 @@
       Quantity <span class="required">*</span>
       <% end %>
       <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.number_field :quantity, id: :product_quantity, class: 'form-control col-md-12 col-xs-12' %>
+        <%= form.number_field :quantity, id: :product_quantity, class: 'form-control col-md-12 col-xs-12', required: true, min: 1 %>
       </div>
     </div>
     <div class="form-group">
@@ -51,7 +51,7 @@
       Decription <span class="required">*</span>
       <% end %>
       <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.text_area :description, id: :product_description, rows: 4, class: 'form-control col-md-12 col-xs-12' %>
+        <%= form.text_area :description, id: :product_description, rows: 4, class: 'form-control col-md-12 col-xs-12', required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -59,37 +59,58 @@
       Category <span class="required">*</span>
       <% end %>
       <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.select :category, options_for_select(@categories.map{ |c| [c.name, c.id]}), {include_blank: true}, { 
-         id: 'category' , class: 'form-control col-md-12 col-xs-12' , onclick: 'clickCategory()'}%>
+        <%= form.select :category, options_for_select(@categories.map{ |c| [c.name, c.id]}, selected:
+          (product.persisted? ? @category_value : nil)), {include_blank: true}, { 
+           id: 'category' , class: 'form-control col-md-12 col-xs-12', required: true , onclick: 'clickCategory()'}%>
+         </div>
        </div>
-     </div>
-     <div class="form-group">
-      <%= form.label :quantity, class: 'control-label col-md-3 col-sm-3 col-xs-12' do%>
-      Sub Category <span class="required">*</span>
-      <% end %>
-      <div class="col-md-8 col-sm-7 col-xs-12">
-        <%= form.select :sub_category, options_for_select(@sub_categories.map { |c|
-          [c.name, c.id] }, 0), {}, {id: 'sub_category',class: 'select2_group form-control' } %>
+       <div class="form-group">
+        <%= form.label :quantity, class: 'control-label col-md-3 col-sm-3 col-xs-12' do%>
+        Sub Category <span class="required">*</span>
+        <% end %>
+        <div class="col-md-8 col-sm-7 col-xs-12">
+          <%= form.select :sub_category, options_for_select(@sub_categories.map { |c|
+            [c.name, c.id] }, selected: (product.persisted? ? @category_value : nil)), {}, {id: 'sub_category',class: 'select2_group form-control' } %>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <div class="form-group">
-        <%= form.fields_for :images do |p| %>
-        <label class="control-label">Images</label>
-        <%= p.file_field :url, id: 'images', multiple: true, accept: 'image/png,image/jpeg',
-          name:'images[url][]' %>
+        <div class="form-group" style="display: <%= product.persisted? ? 'block' : 'none' %>">
+          <%= form.label :quantity, class: 'control-label col-md-3 col-sm-3 col-xs-12' do%>
+          Available <span class="required">*</span>
+          <% end %>
+          <div class="col-md-8 col-sm-7 col-xs-12">
+            <%= form.select :available, options_for_select(@availables.map { |c|
+              [c, c] }, selected: @available), {}, {id: 'available',class: 'select2_group form-control' } %>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <% unless @image.nil?%>
+            <div class="product_gallery">
+              <% for i in 0...@image.count %> 
+              <a class="col-md-4">
+                <img src="<%= @image[i].url %>" class="img-thumbnail" alt="<%= @product.name %>" />
+              </a>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= form.fields_for :images do |p| %>
+            <label class="control-label">Images</label>
+            <%= p.file_field :url, id: 'images', multiple: true, accept: 'image/png,image/jpeg',
+            name:'images[url][]' %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <%= link_to 'Back', url_for(:back), class: "btn btn-primary pull-right" %>
+              <%= form.submit 'Submit', class: 'btn btn-success pull-right' %>
+            </div>
+          </div>
+        </div>
         <% end %>
       </div>
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="ln_solid"></div>
-      <div class="form-group">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <button type="submit" class="btn btn-primary pull-right">Cancel</button>
-          <%= form.submit 'Submit', class: 'btn btn-success pull-right' %>
-        </div>
-      </div>
-    </div>
-    <% end %>
-  </div>
