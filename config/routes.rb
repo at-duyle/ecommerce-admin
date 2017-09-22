@@ -25,13 +25,8 @@ Rails.application.routes.draw do
   resources :images
   resources :delivery_orders
   resources :comments
-  resources :categories do
-    resources :sub_categories do
-      collection do
-        get 'sub'
-      end
-    end
-  end
+  resources :categories
+  resources :sub_categories
   resources :carts
   resources :admins
   resources :main_admin, only: :index
