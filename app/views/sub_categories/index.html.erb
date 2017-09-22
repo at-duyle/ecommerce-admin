@@ -11,7 +11,6 @@
       <th>Slug</th>
       <th>Show</th>
       <th>Edit</th>
-      <th>Delete</th>
    </tr>
  </thead>
   <tbody>
@@ -22,14 +21,6 @@
         <td><%= sub_category.slug %></td>
         <td><%= link_to sub_category_path(sub_category) do %>
           <button class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-search"></span></button>
-          <% end %>
-        </td>
-        <td><%= link_to edit_sub_category_path(sub_category) do %>
-          <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
-          <% end %>
-        </td>
-        <td><%= link_to sub_category, method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
           <% end %>
         </td>
       </tr>

@@ -41,7 +41,6 @@
             <th>Slug</th>
             <th>Show</th>
             <th>Edit</th>
-            <th>Delete</th>
          </tr>
        </thead>
        <tbody>
@@ -55,10 +54,6 @@
               </td>
               <td><%= link_to edit_category_path(category) do %>
                 <button class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
-                <% end %>
-              </td>
-              <td><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
                 <% end %>
               </td>
             </tr>
