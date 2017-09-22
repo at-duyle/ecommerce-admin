@@ -1,41 +1,51 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Shops</h1>
-
-<table>
+<%= link_to 'New Shop', new_shop_path, class: 'btn btn-primary' %>
+<table id="datatable-buttons" class="table table-striped table-bordered">
   <thead>
     <tr>
+      <th>Logo</th>
       <th>Name</th>
       <th>Address</th>
       <th>Phone number</th>
-      <th>Logo</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
       <th>Available</th>
       <th>Slug</th>
-      <th colspan="3"></th>
+      <th>Show</th>
+      <th>Lock</th>
     </tr>
   </thead>
 
   <tbody>
     <% @shops.each do |shop| %>
-      <tr>
-        <td><%= shop.name %></td>
-        <td><%= shop.address %></td>
-        <td><%= shop.phone_number %></td>
-        <td><%= shop.logo %></td>
-        <td><%= shop.latitude %></td>
-        <td><%= shop.longitude %></td>
-        <td><%= shop.available %></td>
-        <td><%= shop.slug %></td>
-        <td><%= link_to 'Show', shop %></td>
-        <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
-        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= image_tag("#{shop.logo}", class: "img-thumbnail", alt: "Cinque Terre", size: "150x100") %></td>
+      <td><%= shop.name %></td>
+      <td><%= shop.address %></td>
+      <td><%= shop.phone_number %></td>
+      <td><%= shop.available %></td>
+      <td><%= shop.slug %></td>
+      <td><%= link_to shop do %>
+        <button class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-search"></span></button>
+        <% end %>
+      </td>
+      <td><%= link_to edit_shop_path(shop) do %>
+        <button class="btn btn-primary btn-xs"><span class="<%= shop.available == true ? 'fa fa-lock' : 'fa fa-unlock' %>"></span></button>
+        <% end %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New Shop', new_shop_path %>
+<%= javascript_include_tag 'datatables/jquery.dataTables.min' %>
+<%= javascript_include_tag 'datatables/dataTables.bootstrap' %>
+<%= javascript_include_tag 'datatables/dataTables.buttons.min' %>
+<%= javascript_include_tag 'datatables/jszip.min.js' %>
+<%= javascript_include_tag 'datatables/pdfmake.min' %>
+<%= javascript_include_tag 'datatables/vfs_fonts' %>
+<%= javascript_include_tag 'datatables/buttons.html5.min' %>
+<%= javascript_include_tag 'datatables/buttons.print.min' %>
+<%= javascript_include_tag 'datatables/dataTables.responsive.min' %>
+<%= javascript_include_tag 'datatables/responsive.bootstrap.min' %>
+<%= javascript_include_tag params[:controller] %>

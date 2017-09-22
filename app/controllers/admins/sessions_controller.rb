@@ -25,11 +25,7 @@ class Admins::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(admin)
-    if admin.admin?
-      users_path
-    else
-      products_path
-    end
+    main_admin_index_path
   end
 
   # protected

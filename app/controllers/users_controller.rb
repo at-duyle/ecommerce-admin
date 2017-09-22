@@ -63,8 +63,12 @@ class UsersController < ApplicationController
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied: #{exception}"
-    redirect_to new_admin_session_path
+    if current_admin.nil?
+      flash[:error] = "Access denied: #{exception}"
+      redirect_to new_admin_session_path
+    else
+      flash[:error] = "Access denied: You didn't access!"
+    end
   end
 
   private
