@@ -8,6 +8,9 @@ class Ability
       can :manage, User
       can :manage, Admin
       can :manage, Shop
+      can :manage, Category
+      can :manage, SubCategory
+      can :manage, Request
       can :index, :main_admin
       cannot :destroy, Admin
     elsif user.manager?
@@ -16,10 +19,17 @@ class Ability
       can :index, :main_admin
       can :read, Category
       can :read, SubCategory
+      can :manage, PurchaseOrder
+      can :manage, DeliveryOrder
       can :manage, Admin, manager_id: user.id
       cannot :destroy, Admin, manager_id: user.id
     elsif user.partner?
-      can :read, :all
+      can :index, :main_admin
+      can :read, Category
+      can :read, SubCategory
+      can :manage, PurchaseOrder
+      can :manage, DeliveryOrder
+      can :manage, Product, shop_id: Shop.find(user.shop_id).id
     else
       cannot :manage, :all
     end

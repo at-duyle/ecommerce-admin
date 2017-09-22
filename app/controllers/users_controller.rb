@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       flash[:error] = "Access denied: #{exception}"
       redirect_to new_admin_session_path
     else
-      flash[:error] = "Access denied: You didn't access!"
+      render file: 'public/403.html', layout: false
     end
   end
 
