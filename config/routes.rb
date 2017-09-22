@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'main_admin#index'
+  resources :requests
   devise_for :admins, path_names: {
     sign_in: 'login',
     sign_out: 'logout',

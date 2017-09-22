@@ -62,13 +62,14 @@ class ProductsPurchaseOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_products_purchase_order
-      @products_purchase_order = ProductsPurchaseOrder.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def products_purchase_order_params
-      params.require(:products_purchase_order).permit(:product_id, :purchase_order_id, :quantity)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_products_purchase_order
+    @products_purchase_order = ProductsPurchaseOrder.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def products_purchase_order_params
+    params.require(:products_purchase_order).permit(:product_id, :purchase_order_id, :quantity)
+  end
 end

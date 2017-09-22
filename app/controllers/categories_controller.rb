@@ -65,18 +65,24 @@ class CategoriesController < ApplicationController
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied: #{exception}"
-    redirect_to new_admin_session_path
+    if current_admin.nil?
+      flash[:error] = "Access denied: #{exception}"
+      redirect_to new_admin_session_path
+    else
+      render file: 'public/403.html', layout: false
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit(:name, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+
+  def set_category
+    @category = Category.friendly.find(params[:id])
   end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def category_params
+    params.require(:category).permit(:name, :slug)
+  end
+end

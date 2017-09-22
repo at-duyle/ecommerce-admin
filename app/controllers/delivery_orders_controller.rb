@@ -62,13 +62,14 @@ class DeliveryOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_delivery_order
-      @delivery_order = DeliveryOrder.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def delivery_order_params
-      params.require(:delivery_order).permit(:user_id, :status, :total_price, :name, :city, :district, :ward, :address, :phone)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_delivery_order
+    @delivery_order = DeliveryOrder.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def delivery_order_params
+    params.require(:delivery_order).permit(:user_id, :status, :total_price, :name, :city, :district, :ward, :address, :phone)
+  end
 end

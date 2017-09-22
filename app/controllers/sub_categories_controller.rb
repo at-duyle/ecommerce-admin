@@ -67,8 +67,12 @@ class SubCategoriesController < ApplicationController
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied: #{exception}"
-    redirect_to new_admin_session_path
+    if current_admin.nil?
+      flash[:error] = "Access denied: #{exception}"
+      redirect_to new_admin_session_path
+    else
+      render file: 'public/403.html', layout: false
+    end
   end
 
   private

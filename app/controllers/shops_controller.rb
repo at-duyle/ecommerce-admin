@@ -1,10 +1,12 @@
 class ShopsController < ApplicationController
+  load_and_authorize_resource find_by: :slug
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops
   # GET /shops.json
   def index
     @shops = Shop.all
+    @shops = @shops.drop(1)
   end
 
   # GET /shops/1
@@ -62,8 +64,12 @@ class ShopsController < ApplicationController
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied: #{exception}"
-    redirect_to new_admin_session_path
+    if current_admin.nil?
+      flash[:error] = "Access denied: #{exception}"
+      redirect_to new_admin_session_path
+    else
+      render file: 'public/403.html', layout: false
+    end
   end
 
   private
