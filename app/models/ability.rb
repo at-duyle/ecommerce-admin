@@ -12,9 +12,9 @@ class Ability
       can :manage, SubCategory
       can :manage, Request
       can :index, :main_admin
+      can :index, :revenue
       cannot :destroy, Admin
     elsif user.manager?
-      # can :manage, Shop, id: user.shop_id
       can :manage, Product, shop_id: Shop.find(user.shop_id).id
       can :index, :main_admin
       can :read, Category

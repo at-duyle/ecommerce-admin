@@ -30,5 +30,10 @@ Rails.application.routes.draw do
   resources :carts
   resources :admins
   resources :main_admin, only: :index
+  resources :revenue, only: :index do
+    member do
+      get :revenue
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
