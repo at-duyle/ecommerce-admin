@@ -20,4 +20,6 @@
  *= require icheck/flat/green
  *= require floatexamples
  *= require fileinput/fileinput.min
+ *= require alertifyjs/alertify.min
+ *= require alertifyjs/default.min
  */

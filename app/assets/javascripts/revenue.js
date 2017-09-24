@@ -63,7 +63,6 @@ function clickShop(){
       });
     },
     error: function(err){
-      console.log('error')
       console.log(err);
     }
   });
