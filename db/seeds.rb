@@ -75,7 +75,7 @@ admin_temp = Admin.create!(username: 'duyenbui',
     confirmation_token: rand(100000..999999),
     reset_password_sent_at: Time.now(),
     reset_password_token: rand(100000..999999),
-    shop_id: 10)
+    shop_id: 11)
 
 Admin.create!(username: 'duyle',
     password: '123456',

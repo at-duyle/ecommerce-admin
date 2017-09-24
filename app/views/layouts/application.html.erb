@@ -71,7 +71,7 @@
                 <% if can? :manage, Category %>
                 <li>
                   <%= link_to categories_path do %>
-                  <i class="fa fa-server"></i> Categories & Sub Categories
+                  <i class="fa fa-server"></i> Category & Sub Category
                   <% end %>
                 </li>
                 <% end %>
@@ -110,10 +110,10 @@
                   </a>
                   <ul class="nav child_menu" style="display: none">
                     <li>
-                      <%= link_to 'Statistic 1',delivery_orders_path %>
+                      <%= link_to 'Revenue', revenue_index_path %>
                     </li>
                     <li>
-                      <%= link_to 'Statistic 2',delivery_orders_path %>
+                      <%= link_to 'Statistic 2', delivery_orders_path %>
                     </li>
                   </ul>
                 </li>
