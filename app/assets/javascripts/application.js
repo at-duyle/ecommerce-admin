@@ -49,4 +49,5 @@
 //= require fileinput/purify.min
 //= require fileinput/fileinput.min
 //= require cloudinary
+//= require alertifyjs/alertify.min
 
