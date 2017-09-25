@@ -8,7 +8,7 @@
 <% unless notice['errors'].nil? %>
 <script type="text/javascript">
   alertify.set('notifier','position', 'top-right');
-  alertify.errors('<%= notice['errors'] %>').dismissOthers();
+  alertify.error('<%= notice['errors'] %>').dismissOthers();
 </script>
 <% end %>
 <% end %>

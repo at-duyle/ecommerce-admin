@@ -1,4 +1,17 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.nil? %>
+<% unless notice['message'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.success('<%= notice['message'] %>').dismissOthers();
+</script>
+<% end %>
+<% unless notice['errors'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.error('<%= notice['errors'] %>').dismissOthers();
+</script>
+<% end %>
+<% end %>
 
 <h1>Products Purchase Orders</h1>
 
