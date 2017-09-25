@@ -1,11 +1,12 @@
 class AdminsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: [:show, :update, :destroy]
 
   # GET /admins
   # GET /admins.json
   def index
     @admins = current_admin.admin? ? Admin.all : Admin.where(manager_id: current_admin.id)
+    @admins = @admins.drop(1) if current_admin.admin?
   end
 
   # GET /admins/1
@@ -41,13 +42,17 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1
   # PATCH/PUT /admins/1.json
   def update
-    respond_to do |format|
-      if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin }
+    if @admin.update!(available: !@admin.available)
+      if !@admin.available
+        redirect_to @admin, notice: { message: 'Account was successfully locked.' }
       else
-        format.html { render :edit }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
+        redirect_to @admin, notice: { message: 'Account was successfully unlocked.' }
+      end
+    else
+      if !@admin.available
+        redirect_to @admin, notice: { errors: 'Account was unsuccessfully locked.' }
+      else
+        redirect_to @admin, notice: { errors: 'Account was unsuccessfully unlocked.' }
       end
     end
   end
@@ -80,7 +85,7 @@ class AdminsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_params
-    params.require(:admin).permit(:username, :password_digest, :email, :name, :gender, :role, :auth_token,
+    params.require(:admin).permit(:adminname, :password_digest, :email, :name, :gender, :role, :auth_token,
                                   :confirm_send_at, :confirm_token, :confirm_at, :reset_send_at, :reset_token,
                                   :manager_id, :available)
   end

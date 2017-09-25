@@ -16,5 +16,6 @@ module EcommerceAdmin
     # -- all .rb files in that directory are automatically loaded.
     config.serve_static_assets = true
     config.generators.javascript_engine = :js
+    config.active_job.queue_adapter = :sidekiq
   end
 end

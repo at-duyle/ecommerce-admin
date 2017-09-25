@@ -12,52 +12,29 @@ class RequestsController < ApplicationController
   def show
   end
 
-  # GET /requests/new
-  def new
-    @request = Request.new
-  end
-
-  # GET /requests/1/edit
-  def edit
-  end
-
   # POST /requests
   # POST /requests.json
-  def create
-    @request = Request.new(request_params)
-
-    respond_to do |format|
-      if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
-        format.json { render :show, status: :created, location: @request }
-      else
-        format.html { render :new }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /requests/1
-  # PATCH/PUT /requests/1.json
   def update
-    respond_to do |format|
-      if @request.update(request_params)
-        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-        format.json { render :show, status: :ok, location: @request }
-      else
-        format.html { render :edit }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
+    ActiveRecord::Base.transaction do
+      shop = Shop.create!(name: @request.shop_name, address: @request.shop_address,
+                          phone_number: @request.phone_number, latitude: @request.latitude,
+                          longitude: @request.longitude, available: true)
+      admin = Admin.create!(username: @request.name, email: @request.email, name: @request.name,
+                            gender: 2, role: 1, shop_id: shop.id, password: 123456)
+      @request.destroy
+      ConfirmRequestMailer.confirm_request(admin).deliver_later
+      redirect_to requests_path, notice: { message: 'Create new shop and admin successfully!' }
     end
+  rescue ActiveRecord::RecordInvalid => exception
+    redirect_to @request, notice: { errors: exception.record.errors.full_messages }
   end
 
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
-    @request.destroy
+    ConfirmRequestMailer.refuse_request(@request).deliver_later
     respond_to do |format|
-      format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to requests_url, notice: { message: 'Request was refused.' } }
     end
   end
 

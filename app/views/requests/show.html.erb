@@ -1,39 +1,91 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.nil? %>
+<% unless notice['errors'].nil? %>
+<script type="text/javascript">
+  <% notice['errors'].each do |e| %>
+  alertify.set('notifier','position', 'top-right');
+  alertify.error('<%= e %>').dismissOthers();
+  <% end %>
+</script>
+<% end %>
+<% unless notice['message'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.success('<%= notice['message'] %>').dismissOthers();
+</script>
+<% end %>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @request.name %>
-</p>
+<div class="clearfix"></div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @request.email %>
-</p>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail of Request</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a href="#"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a href="#"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+         <h2 class="prod_title">Admin Shop 's Information</h2>
+         <div class="table-full-width">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td width="30%">Full Name</td>
+                <td><strong><%= @request.name %></strong></td>
+              </tr>
+              <tr>
+                <td width="30%">Email</td>
+                <td><strong><%= @request.email %></strong></td>
+              </tr>
+              <tr>
+                <td width="30%">Full name</td>
+                <td><strong><%= @request.phone_number %></strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @request.phone_number %>
-</p>
-
-<p>
-  <strong>Shop name:</strong>
-  <%= @request.shop_name %>
-</p>
-
-<p>
-  <strong>Shop address:</strong>
-  <%= @request.shop_address %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @request.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @request.longitude %>
-</p>
-
-<%= link_to 'Edit', edit_request_path(@request) %> |
-<%= link_to 'Back', requests_path %>
+      <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
+        <h2 class="prod_title">Shop 's Information</h2>
+        <div class="table-full-width">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td width="30%">Shop name</td>
+                <td><strong><%= @request.shop_name %></strong></td>
+              </tr>
+              <tr>
+                <td width="30%">Shop address</td>
+                <td><strong><%= @request.shop_address %></strong></td>
+              </tr>
+              <tr>
+                <td width="30%">Latitude</td>
+                <td><strong><%=  @request.latitude  %></strong></td>
+              </tr>
+              <tr>
+                <td width="30%">Longitude</td>
+                <td><strong><%= @request.longitude %></strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <%= link_to request_path(@request), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary pull-right' do%>
+          <i class="fa fa-check"></i>  Accept
+          <% end %>
+          <%= link_to request_path(@request), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-right' do%>
+          <i class="fa fa-ban"></i>  Refuse
+          <% end %>
+          <%= link_to 'Back', requests_path, class: "btn btn-default pull-right" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
