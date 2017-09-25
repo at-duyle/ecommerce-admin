@@ -92,3 +92,26 @@ Admin.create!(username: 'duyle',
     shop_id: 10)
 
 puts 'Admin'
+10.times do |i|
+  Request.create(
+    name: Faker::Name.name,
+    email: "ngocduy307+#{i + 1}@gmail.com",
+    phone_number: '01203124342',
+    shop_name: FFaker::Company.name,
+    shop_address: FFaker::Address.street_address,
+    latitude: 16.069815,
+    longitude: 108.207000
+  )
+end
+10.times do |i|
+  Request.create(
+    name: Faker::Name.name,
+    email: Faker::Internet.unique.email,
+    phone_number: '01203124342',
+    shop_name: FFaker::Company.name,
+    shop_address: FFaker::Address.street_address,
+    latitude: 16.069815,
+    longitude: 108.207000
+  )
+end
+puts 'Request'

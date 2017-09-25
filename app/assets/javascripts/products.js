@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 var handleDataTableButtons = function() {
   "use strict";
-  0 !== $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+  0 !== $("#datatable-buttons-product").length && $("#datatable-buttons-product").DataTable({
     dom: "Bfrtip",
     buttons: [
     {
@@ -48,7 +48,7 @@ TableManageButtons = function() {
 TableManageButtons.init();
 
 document.addEventListener("turbolinks:before-cache", function() {
-  $("#datatable-buttons").DataTable().destroy();
+  $("#datatable-buttons-product").DataTable().destroy();
 });
 
 function clickCategory(){

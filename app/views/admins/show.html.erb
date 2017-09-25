@@ -1,21 +1,18 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.nil? %>
+<% unless notice['message'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.success('<%= notice['message'] %>').dismissOthers();
+</script>
+<% end %>
+<% unless notice['errors'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.errors('<%= notice['errors'] %>').dismissOthers();
+</script>
+<% end %>
+<% end %>
 <div class="">
-  <div class="page-title">
-    <div class="title_left">
-      <h3>Profile</h3>
-    </div>
-
-    <div class="title_right">
-      <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="clearfix"></div>
 
   <div class="row">
@@ -66,10 +63,10 @@
                     <td><strong><%= @admin.role %></strong></td>
                   </tr>
                   <% if @admin.role === 'partner' %>
-                    <tr>
-                      <td width="30%">Manager</td>
-                      <td><strong><%= Admin.find(@admin.manager_id).name %></strong></td>
-                    </tr>
+                  <tr>
+                    <td width="30%">Manager</td>
+                    <td><strong><%= Admin.find(@admin.manager_id).name %></strong></td>
+                  </tr>
                   <% end %>
                   <tr>
                     <td width="30%">Gender</td>
@@ -84,15 +81,23 @@
                   <tr>
                     <td width="30%">Status</td>
                     <% if @admin.available %>
-                      <td><strong>Available</strong></td>
+                    <td><strong>Available</strong></td>
                     <% else %>
-                      <td><strong>Non-available</strong></td>
+                    <td><strong>Non-available</strong></td>
                     <% end %>
                   </tr>
                 </tbody>
               </table>
-              <%= link_to 'Edit admin', edit_admin_path(@admin), class: 'btn btn-primary pull-right' %>
-              <%= link_to 'Back', url_for(:back), class: "btn btn-default pull-right" %>
+              <% if @admin.available %>
+              <%= link_to admin_path(@admin), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary pull-right' do%>
+              <i class="fa fa-lock"></i>  Lock
+              <% end %>
+              <% else %>
+              <%= link_to admin_path(@admin), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary pull-right' do%>
+              <i class="fa fa-unlock"></i>  Unlock
+              <% end %>
+              <% end %>
+              <%= link_to 'Back', admins_path, class: "btn btn-default pull-right" %>
             </div>
           </div>
         </div>

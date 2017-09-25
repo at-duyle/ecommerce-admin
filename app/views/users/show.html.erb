@@ -1,94 +1,105 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.nil? %>
+<% unless notice['message'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.success('<%= notice['message'] %>').dismissOthers();
+</script>
+<% end %>
+<% unless notice['errors'].nil? %>
+<script type="text/javascript">
+  alertify.set('notifier','position', 'top-right');
+  alertify.error('<%= notice['errors'] %>').dismissOthers();
+</script>
+<% end %>
+<% end %>
+<div class="">
+  <div class="clearfix"></div>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Profile of <strong><%= @user.name %></strong></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a href="#"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="product-image" style="padding-top: 30px;">
+              <img src="http://www.serial-zone.ru/inc/pub/2010/Oct/05/small/pub_1865.gif" class="img-thumbnail" alt="Avatar" />
+            </div>
+          </div>
 
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @user.gender %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @user.address %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
-
-<p>
-  <strong>Auth token:</strong>
-  <%= @user.auth_token %>
-</p>
-
-<p>
-  <strong>Confirm send at:</strong>
-  <%= @user.confirm_send_at %>
-</p>
-
-<p>
-  <strong>Confirm token:</strong>
-  <%= @user.confirm_token %>
-</p>
-
-<p>
-  <strong>Confirm at:</strong>
-  <%= @user.confirm_at %>
-</p>
-
-<p>
-  <strong>Reset send at:</strong>
-  <%= @user.reset_send_at %>
-</p>
-
-<p>
-  <strong>Reset token:</strong>
-  <%= @user.reset_token %>
-</p>
-
-<p>
-  <strong>Available:</strong>
-  <%= @user.available %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @user.slug %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @user.city %>
-</p>
-
-<p>
-  <strong>District:</strong>
-  <%= @user.district %>
-</p>
-
-<p>
-  <strong>Ward:</strong>
-  <%= @user.ward %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+          <div class="col-md-8 col-sm-8 col-xs-12" style="border:0px solid #e5e5e5;">
+            <h2 class="prod_title"><%= @user.name %></h2>
+            <div class="table-full-width">
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td width="30%">Username</td>
+                    <td><strong><%= @user.username %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Email</td>
+                    <td><strong><%= @user.email %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Full name</td>
+                    <td><strong><%= @user.name %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Gender</td>
+                    <td><strong><%= @user.gender %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">City</td>
+                    <td><strong><%= @user.city %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">District</td>
+                    <td><strong><%= @user.district %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Ward</td>
+                    <td><strong><%= @user.ward %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Address</td>
+                    <td><strong><%= @user.address %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Description</td>
+                    <td><strong><%= @user.description %></strong></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Status</td>
+                    <% if @user.available %>
+                    <td><strong>Available</strong></td>
+                    <% else %>
+                    <td><strong>Non-available</strong></td>
+                    <% end %>
+                  </tr>
+                </tbody>
+              </table>
+              <% if @user.available %>
+              <%= link_to user_path(@user), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary pull-right' do%>
+                <i class="fa fa-lock"></i>  Lock
+              <% end %>
+              <% else %>
+              <%= link_to user_path(@user), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary pull-right' do%>
+                <i class="fa fa-unlock"></i>  Unlock
+              <% end %>
+              <% end %>
+              <%= link_to 'Back', users_path, class: "btn btn-default pull-right" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

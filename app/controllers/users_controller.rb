@@ -19,15 +19,15 @@ class UsersController < ApplicationController
     @user.skip_password_validation = true
     if @user.update!(available: !@user.available)
       if !@user.available
-        redirect_to users_path, notice: { message: 'User was successfully locked.' }
+        redirect_to @user, notice: { message: 'User was successfully locked.' }
       else
-        redirect_to users_path, notice: { message: 'User was successfully unlocked.' }
+        redirect_to @user, notice: { message: 'User was successfully unlocked.' }
       end
     else
       if !@user.available
-        redirect_to users_path, notice: { errors: 'User was unsuccessfully locked.' }
+        redirect_to @user, notice: { errors: 'User was unsuccessfully locked.' }
       else
-        redirect_to users_path, notice: { errors: 'User was unsuccessfully unlocked.' }
+        redirect_to @user, notice: { errors: 'User was unsuccessfully unlocked.' }
       end
     end
   end

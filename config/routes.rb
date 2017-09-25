@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'main_admin#index'
-  resources :requests
+  resources :requests, only: %i[index show update destroy]
   devise_for :admins, path_names: {
     sign_in: 'login',
     sign_out: 'logout',
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions',
     passwords: 'admins/passwords'
   }
-  resources :users, only: %i[index show new create update]
+  resources :users, only: %i[index show update]
   resources :shops do
     collection do
       resources :products do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :sub_categories
   resources :carts
-  resources :admins
+  resources :admins, only: %i[index show new create update]
   resources :main_admin, only: :index
   resources :revenue, only: :index do
     member do
