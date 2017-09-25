@@ -38,6 +38,15 @@ class RequestsController < ApplicationController
     end
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    if current_admin.nil?
+      flash[:error] = "Access denied: #{exception}"
+      redirect_to new_admin_session_path
+    else
+      render file: 'public/403.html', layout: false
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
