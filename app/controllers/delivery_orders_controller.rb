@@ -1,4 +1,5 @@
 class DeliveryOrdersController < ApplicationController
+  load_and_authorize_resource
   before_action :set_delivery_order, only: [:show, :edit, :update, :destroy]
 
   # GET /delivery_orders
@@ -58,6 +59,15 @@ class DeliveryOrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to delivery_orders_url, notice: 'Delivery order was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    if current_admin.nil?
+      flash[:error] = "Access denied: #{exception}"
+      redirect_to new_admin_session_path
+    else
+      render file: 'public/403.html', layout: false
     end
   end
 

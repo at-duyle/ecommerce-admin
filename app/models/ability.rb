@@ -13,6 +13,7 @@ class Ability
       can :manage, Request
       can :index, :main_admin
       can :index, :revenue
+      can :read, DeliveryOrder
       cannot :destroy, Admin
     elsif user.manager?
       can :manage, Product, shop_id: Shop.find(user.shop_id).id
