@@ -1,62 +1,13 @@
-<%= form_with(model: delivery_order, local: true) do |form| %>
-  <% if delivery_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(delivery_order.errors.count, "error") %> prohibited this delivery_order from being saved:</h2>
+<%= form_with(model: delivery_order, local: true, class: "form-horizontal") do |form| %>
 
-      <ul>
-      <% delivery_order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :delivery_order_user_id %>
+<div class="form-group">
+  <%= form.label :status, class: "control-label col-sm-2" %>
+  <div class="col-sm-10">
+    <%= form.select :status, options_for_select(@status.map { |c|
+              [c, c] }, selected: delivery_order.status), {}, {id: :delivery_order_status,class: 'form-control' } %>
   </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status, id: :delivery_order_status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :total_price %>
-    <%= form.text_field :total_price, id: :delivery_order_total_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :delivery_order_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city, id: :delivery_order_city %>
-  </div>
-
-  <div class="field">
-    <%= form.label :district %>
-    <%= form.text_field :district, id: :delivery_order_district %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ward %>
-    <%= form.text_field :ward, id: :delivery_order_ward %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :delivery_order_address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone, id: :delivery_order_phone %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
+<div class="actions">
+  <%= form.submit class: "btn btn-primary" %>
+</div>
 <% end %>

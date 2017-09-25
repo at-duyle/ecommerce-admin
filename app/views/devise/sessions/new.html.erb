@@ -19,39 +19,47 @@
       <div id="login" class="animate form">
         <section class="login_content">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <h1>Login Form</h1>
-            <%= devise_error_messages! %>
-            <% flash.each do |key, value| %>
-              <div class="<%= flash_class(key) %>">
-                    <%= value %>
-              </div>
-            <% end %>
+          <h1>Login Form</h1>
+          <%= devise_error_messages! %>
+          <% flash.each do |key, value| %>
+          <% if value.include? 'successfully' %>
+          <script type="text/javascript">
+            alertify.set('notifier','position', 'top-right');
+            alertify.success('<%= value %>').dismissOthers();
+          </script>
+          <% else %>
+          <script type="text/javascript">
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('<%= value %>').dismissOthers();
+          </script>
+          <% end %>
+          <% end %>
+          <div>
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email", required: true %>
+          </div>
+
+          <div>
+            <%= f.password_field :password, class: 'form-control', placeholder: "Password", required: true, autocomplete: "off" %>
+          </div>
+
+          <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+          <% end -%>
+
+          <div class="actions">
+            <%= f.submit "Log in", class: "btn btn-default submit" %>
+            <%= render "devise/shared/links" %>
+          </div>
+          <div class="clearfix"></div>
+          <div class="separator">
+            <br />
             <div>
-              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email", required: true %>
+              <h1><i class="fa fa-paw" style="font-size: 26px;"></i> SuperShop!</h1>
             </div>
-
-            <div>
-              <%= f.password_field :password, class: 'form-control', placeholder: "Password", required: true, autocomplete: "off" %>
-            </div>
-
-            <% if devise_mapping.rememberable? -%>
-              <div class="field">
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
-              </div>
-            <% end -%>
-
-            <div class="actions">
-              <%= f.submit "Log in", class: "btn btn-default submit" %>
-              <%= render "devise/shared/links" %>
-            </div>
-            <div class="clearfix"></div>
-            <div class="separator">
-              <br />
-              <div>
-                <h1><i class="fa fa-paw" style="font-size: 26px;"></i> SuperShop!</h1>
-              </div>
-            </div>
+          </div>
           <% end %>
           <!-- form -->
         </section>
