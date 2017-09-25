@@ -1,43 +1,73 @@
 <p id="notice"><%= notice %></p>
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Shops</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li><a href="#"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <table id="datatable-buttons-delivery" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Total price</th>
+            <th>Status</th>
+            <th>Created at</th>
+            <th>Show</th>
+            <% if can? :update, DeliveryOrder %>
+            <th>Edit</th>
+            <% end %>
+          </tr>
+        </thead>
 
-<h1>Delivery Orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Status</th>
-      <th>Total price</th>
-      <th>Name</th>
-      <th>City</th>
-      <th>District</th>
-      <th>Ward</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @delivery_orders.each do |delivery_order| %>
-      <tr>
-        <td><%= delivery_order.user %></td>
-        <td><%= delivery_order.status %></td>
-        <td><%= delivery_order.total_price %></td>
-        <td><%= delivery_order.name %></td>
-        <td><%= delivery_order.city %></td>
-        <td><%= delivery_order.district %></td>
-        <td><%= delivery_order.ward %></td>
-        <td><%= delivery_order.address %></td>
-        <td><%= delivery_order.phone %></td>
-        <td><%= link_to 'Show', delivery_order %></td>
-        <td><%= link_to 'Edit', edit_delivery_order_path(delivery_order) %></td>
-        <td><%= link_to 'Destroy', delivery_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+        <tbody>
+          <% @delivery_orders.each do |delivery_order| %>
+          <tr>
+            <td><%= delivery_order.id %></td>
+            <td><%= delivery_order.user.name %></td>
+            <td><%= delivery_order.name %></td>
+            <td><%= delivery_order.phone %></td>
+            <td><%= delivery_order.total_price %></td>
+            <td><%= delivery_order.status %></td>
+            <td><%= delivery_order.created_at.strftime("%m-%d-%Y") %></td>
+            <td><%= link_to delivery_order do %>
+              <button class="btn btn-primary btn-xs" ><span class="fa fa-search"></span></button>
+              <% end %>
+            </td>
+            <% if can? :update, DeliveryOrder %>
+            <td>
+              <%= link_to edit_delivery_order_path(delivery_order) do%>
+              <button class="btn btn-primary btn-xs" ><span class="fa fa-pencil"></span></button>
+              <% end %>
+            </td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 <br>
-
-<%= link_to 'New Delivery Order', new_delivery_order_path %>
+<div class="clearfix"></div>
+<%= javascript_include_tag 'datatables/jquery.dataTables.min' %>
+<%= javascript_include_tag 'datatables/dataTables.bootstrap' %>
+<%= javascript_include_tag 'datatables/dataTables.buttons.min' %>
+<%= javascript_include_tag 'datatables/jszip.min.js' %>
+<%= javascript_include_tag 'datatables/pdfmake.min' %>
+<%= javascript_include_tag 'datatables/vfs_fonts' %>
+<%= javascript_include_tag 'datatables/buttons.html5.min' %>
+<%= javascript_include_tag 'datatables/buttons.print.min' %>
+<%= javascript_include_tag 'datatables/dataTables.responsive.min' %>
+<%= javascript_include_tag 'datatables/responsive.bootstrap.min' %>
+<%= javascript_include_tag params[:controller] %>

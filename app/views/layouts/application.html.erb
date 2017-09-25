@@ -8,7 +8,6 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= cloudinary_js_config %>
 </head>
-
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
@@ -96,7 +95,7 @@
                   <% end %>
                 </li>
                 <% end %>
-                <% if can? :manage, DeliveryOrder %>
+                <% if can? :read, DeliveryOrder %>
                 <li>
                   <%= link_to delivery_orders_path do %>
                   <i class="fa fa-calendar-minus-o"></i> Delivery Orders
@@ -164,14 +163,14 @@
             </li>
             <% elsif current_admin.role === 'manager' %>
             <li role="presentation" class="dropdown">
-              <a href="/requests" class="dropdown-toggle info-number">
+              <a href="/requests">
                 <i class="fa fa-building"></i>
                 <span class="badge bg-green"><%= current_shop.name %></span>
               </a>
             </li>
             <% else %>
             <li role="presentation" class="dropdown">
-              <a href="#" class="dropdown-toggle info-number">
+              <a href="#">
                 <i class="fa fa-building"></i>
                 <span class="badge bg-green"><%= current_shop.name %></span>
               </a>
