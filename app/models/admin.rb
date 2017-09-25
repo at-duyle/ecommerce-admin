@@ -40,7 +40,9 @@ class Admin < ApplicationRecord
   enum role: %w[admin manager partner]
   enum gender: %w[male female other]
   # ================Validates=====================
-
+  validates :username, :email, presence: true
+  validates :username, :email, uniqueness: true
+  validates_format_of :email, with: /\w+@\w+\.{1}[a-zA-Z]{2,}/
   def active_for_authentication?
     super && available?
   end

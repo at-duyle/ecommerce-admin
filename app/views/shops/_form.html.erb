@@ -1,57 +1,54 @@
 <%= form_with(model: shop, local: true) do |form| %>
-  <% if shop.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+<% if shop.errors.any? %>
+<% shop.errors.full_messages.each do |message| %>
+<script>
+  alertify.set('notifier','position', 'top-right');
+  alertify.error('<%= message %>');
+</script>
+<% end %>
+<% end %>
 
-      <ul>
-      <% shop.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="field">
+  <%= form.label :name %>
+  <%= form.text_field :name, id: :shop_name %>
+</div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :shop_name %>
-  </div>
+<div class="field">
+  <%= form.label :address %>
+  <%= form.text_field :address, id: :shop_address %>
+</div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :shop_address %>
-  </div>
+<div class="field">
+  <%= form.label :phone_number %>
+  <%= form.text_field :phone_number, id: :shop_phone_number %>
+</div>
 
-  <div class="field">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number, id: :shop_phone_number %>
-  </div>
+<div class="field">
+  <%= form.label :logo %>
+  <%= form.text_field :logo, id: :shop_logo %>
+</div>
 
-  <div class="field">
-    <%= form.label :logo %>
-    <%= form.text_field :logo, id: :shop_logo %>
-  </div>
+<div class="field">
+  <%= form.label :latitude %>
+  <%= form.text_field :latitude, id: :shop_latitude %>
+</div>
 
-  <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude, id: :shop_latitude %>
-  </div>
+<div class="field">
+  <%= form.label :longitude %>
+  <%= form.text_field :longitude, id: :shop_longitude %>
+</div>
 
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude, id: :shop_longitude %>
-  </div>
+<div class="field">
+  <%= form.label :available %>
+  <%= form.check_box :available, id: :shop_available %>
+</div>
 
-  <div class="field">
-    <%= form.label :available %>
-    <%= form.check_box :available, id: :shop_available %>
-  </div>
+<div class="field">
+  <%= form.label :slug %>
+  <%= form.text_field :slug, id: :shop_slug %>
+</div>
 
-  <div class="field">
-    <%= form.label :slug %>
-    <%= form.text_field :slug, id: :shop_slug %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions">
+  <%= form.submit %>
+</div>
 <% end %>

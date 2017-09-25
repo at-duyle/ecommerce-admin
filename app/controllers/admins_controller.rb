@@ -26,11 +26,12 @@ class AdminsController < ApplicationController
   # POST /admins
   # POST /admins.json
   def create
-    @admin = Admin.new(admin_params)
+    @admin = Admin.new(admin_params.merge(password: 123456, role: 2, manager_id: current_admin.id,
+                                          shop_id: current_shop.id))
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
+        format.html { redirect_to @admin, notice: { message: 'Admin was successfully created.' } }
         format.json { render :show, status: :created, location: @admin }
       else
         format.html { render :new }
@@ -85,8 +86,6 @@ class AdminsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_params
-    params.require(:admin).permit(:adminname, :password_digest, :email, :name, :gender, :role, :auth_token,
-                                  :confirm_send_at, :confirm_token, :confirm_at, :reset_send_at, :reset_token,
-                                  :manager_id, :available)
+    params.require(:admin).permit(:username, :email, :name, :gender)
   end
 end
