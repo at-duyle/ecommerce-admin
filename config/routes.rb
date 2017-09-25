@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords'
   }
   resources :users, only: %i[index show update]
-  resources :shops do
+  resources :shops, only: %i[index show update] do
     collection do
       resources :products do
         collection do
