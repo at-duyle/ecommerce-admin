@@ -20,14 +20,9 @@ Rails.application.routes.draw do
     end
   end
   resources :purchase_orders
-  resources :products_purchase_orders
-  resources :products_delivery_orders
-  resources :images
-  resources :delivery_orders
-  resources :comments
+  resources :delivery_orders, only: %i[index show edit update]
   resources :categories
   resources :sub_categories
-  resources :carts
   resources :admins, only: %i[index show new create update]
   resources :main_admin, only: :index
   resources :revenue, only: :index do
