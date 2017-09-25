@@ -78,6 +78,28 @@
                     <td><strong><%= Shop.find(@admin.shop_id).name %></strong></td>
                   </tr>
                   <% end %>
+                  <% if @admin.role != 'admin' %>
+                  <% if @admin.role == 'manager' %>
+                  <tr>
+                    <td width="30%">Partner</td>
+                    <td><strong>
+                      <%
+                      @partners = Admin.where(manager_id: @admin.id)
+                      @partners.each do |partner|
+                      %>
+                      <%= link_to partner.name, admin_path(partner) %>,
+                      <% end %>
+                    </strong></td>
+                  </tr>
+                  <% else %>
+                  <tr>
+                    <td width="30%">Manager</td>
+                    <td><strong>
+                      <%= link_to @admin.manager.name, admin_path(@admin.manager) %>,
+                    </strong></td>
+                  </tr>
+                  <% end %>
+                  <% end %>
                   <tr>
                     <td width="30%">Status</td>
                     <% if @admin.available %>
