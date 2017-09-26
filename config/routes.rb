@@ -19,7 +19,12 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :purchase_orders
+  resources :purchase_orders, only: %i[index show new create destroy] do
+    collection do
+      post 'product'
+      get 'products/:id', controller: 'purchase_orders', action: 'delete_product'
+    end
+  end
   resources :delivery_orders, only: %i[index show edit update]
   resources :categories
   resources :sub_categories

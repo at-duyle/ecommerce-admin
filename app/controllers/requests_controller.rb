@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_request, only: [:show, :edit, :update, :destroy]
 
   # GET /requests
@@ -17,10 +18,10 @@ class RequestsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       shop = Shop.create!(name: @request.shop_name, address: @request.shop_address,
-                          phone_number: @request.phone_number, latitude: @request.latitude,
-                          longitude: @request.longitude, available: true)
+        phone_number: @request.phone_number, latitude: @request.latitude,
+        longitude: @request.longitude, available: true)
       admin = Admin.create!(username: @request.name, email: @request.email, name: @request.name,
-                            gender: 2, role: 1, shop_id: shop.id, password: 123456)
+        gender: 2, role: 1, shop_id: shop.id, password: 123456)
       @request.destroy
       ConfirmRequestMailer.confirm_request(admin).deliver_later
       redirect_to requests_path, notice: { message: 'Create new shop and admin successfully!' }

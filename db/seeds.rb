@@ -89,7 +89,7 @@ Admin.create!(username: 'duyle',
     reset_password_sent_at: Time.now(),
     reset_password_token: rand(100000..999999),
     manager_id: admin_temp.id,
-    shop_id: 10)
+    shop_id: 11)
 
 puts 'Admin'
 3.times do |i|
