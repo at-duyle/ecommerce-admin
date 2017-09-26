@@ -22,4 +22,6 @@
  *= require fileinput/fileinput.min
  *= require alertifyjs/alertify.min
  *= require alertifyjs/default.min
+ *= require selectizejs/selectize
+ *= require selectizejs/selectize.default
  */

@@ -40,7 +40,7 @@ TableManageButtons = function() {
   "use strict";
   return {
     init: function() {
-      handleDataTableButtons()
+      handleDataTableButtons();
     }
   }
 }();
